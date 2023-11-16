@@ -1,1 +1,0 @@
-::set-output name=version::fa4c56e
