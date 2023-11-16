@@ -23,6 +23,4 @@ jobs:
       #    commit_message: Update file with git commit version
       #    branch: ${{ github.base_ref }}
       - name: Push
-        run: git add version.txt
-             git commit -m "Adding version"
-             git push -f origin master
+        run: git add version.txt && git commit -m "Adding version" && git push -f origin master
