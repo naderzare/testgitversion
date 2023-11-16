@@ -17,8 +17,12 @@ jobs:
       - name: Get git commit version and put in file
         run: echo "::set-output name=version::$(git rev-parse --short HEAD)" > version.txt
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Update file with git commit version
-          branch: ${{ github.base_ref }}
+      #- name: Commit and push changes
+      #  uses: stefanzweifel/git-auto-commit-action@v4
+      #  with:
+      #    commit_message: Update file with git commit version
+      #    branch: ${{ github.base_ref }}
+      - name: Push
+        run: git add version.txt
+             git commit -m "Adding version"
+             git push -f origin master
