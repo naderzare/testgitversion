@@ -9,11 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
+      - name: d1
+        run: echo "$(git branch)"
+        
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # Fetch all history for all branches and tags.
-
+              ref: main
+      
+      - name: d2
+        run: echo "$(git branch)"
+        
       - name: Get git commit version
         run: echo "::set-output name=version::$(git rev-parse --short HEAD)" > version.txt
 
