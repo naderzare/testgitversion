@@ -9,18 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
-      - name: d1
-        run: echo "${{git branch}} ${{ github.head_ref }} ${{github.base_ref}}"
-        
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
               ref: main
                    
-      - name: d2
-        run: echo "${{git branch}} ${{ github.head_ref }} ${{github.base_ref}}"
-                     
-      - name: Get git commit version
+      - name: Get git commit version and put in file
         run: echo "::set-output name=version::$(git rev-parse --short HEAD)" > version.txt
 
       - name: Commit and push changes
