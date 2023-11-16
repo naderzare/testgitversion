@@ -15,11 +15,7 @@ jobs:
           fetch-depth: 0 # Fetch all history for all branches and tags.
 
       - name: Get git commit version
-        id: git-version
-        run: echo "::set-output name=version::$(git rev-parse --short HEAD)"
-
-      - name: Update file with git commit version
-        run: echo "Git commit version: ${{ steps.git-version.outputs.version }}" > version.txt
+        run: echo "::set-output name=version::$(git rev-parse --short HEAD)" > version.txt
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
