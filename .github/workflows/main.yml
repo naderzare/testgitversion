@@ -1,0 +1,28 @@
+name: Update file with git commit version
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags.
+
+      - name: Get git commit version
+        id: git-version
+        run: echo "::set-output name=version::$(git rev-parse --short HEAD)"
+
+      - name: Update file with git commit version
+        run: echo "Git commit version: ${{ steps.git-version.outputs.version }}" > version.txt
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update file with git commit version
+          branch: ${{ github.head_ref }}
