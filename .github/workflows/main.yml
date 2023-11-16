@@ -18,8 +18,8 @@ jobs:
               ref: main
                    
       - name: d2
-        run: echo "$(git branch)"
-        
+        run: echo "$(git branch) ${{ github.head_ref }} ${{github.base_ref}}"
+                     
       - name: Get git commit version
         run: echo "::set-output name=version::$(git rev-parse --short HEAD)" > version.txt
 
@@ -27,4 +27,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update file with git commit version
-          branch: ${{ github.head_ref }}
+          branch: ${{ github.base_ref }}
